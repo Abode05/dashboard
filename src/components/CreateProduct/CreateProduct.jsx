@@ -31,12 +31,15 @@ const CreateProduct = () => {
     }).then((res) => {
       console.log(res.data)
       
-     
-      navigate('/dashboard')
-        toast.success(`${res.data}`);
+      setTimeout(() => {
+        navigate('/dashboard')
+      }, 2000);
+      
+        toast.success("success created new product",{autoClose:1500});
      
     }).catch((error) => {
       console.log(error)
+      toast.error("error increated new product")
     })
     
  }

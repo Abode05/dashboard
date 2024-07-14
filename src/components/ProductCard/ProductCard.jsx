@@ -36,26 +36,36 @@ const ProductCard = () => {
     },[SearchFilter,Products])
      const navigate=useNavigate()
      const handledelete = (productId) => {
-         const token = localStorage.getItem("token")
-           toast.info("Deleting product, please wait...") 
-        axios.delete(`https://vica.website/api/items/${productId}`, {
-            headers: {
-                 Accept: "application/json",
-                 'Authorization': `Bearer ${token}`
-            }
-        }).then((res) => {
-            console.log(res.data)
-            
-            
-            setProducts(prevProducts => prevProducts.filter(product => product.id !== productId))
-            navigate("/dashboard")
-            
-        }).catch((error) => {
-            console.log(error)
-        })
-        
-        
-    }
+      
+       const confirmDelete = window.confirm(
+         'Are you sure you want to delete this product?'
+       )
+       if (confirmDelete) {
+         const token = localStorage.getItem('token')
+         toast.info('Deleting product, please wait...')
+         axios
+           .delete(`https://vica.website/api/items/${productId}`, {
+             headers: {
+               Accept: 'application/json',
+               Authorization: `Bearer ${token}`,
+             },
+           })
+           .then((res) => {
+             console.log(res.data)
+             setProducts((prevProducts) =>
+               prevProducts.filter((product) => product.id !== productId)
+             )
+             toast.success('Product deleted successfully')
+             setTimeout(() => {
+               navigate('/dashboard')
+             }, 1500)
+           })
+           .catch((error) => {
+             console.log(error)
+             toast.error('Failed to delete product')
+           })
+       }
+     }
 
     console.log(filter)
     return (

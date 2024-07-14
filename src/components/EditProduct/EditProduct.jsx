@@ -1,6 +1,7 @@
 import axios from 'axios'
 import  { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { toast, ToastContainer } from 'react-toastify'
 
 const EditProduct = () => {
   const { id } = useParams()
@@ -51,10 +52,15 @@ const EditProduct = () => {
            
         }).then((res) => {
           console.log(res.data)
-          navigate("/dashboard")
+          toast.success("success edit product",{autoClose:1200})
+          setTimeout(() => {
+            navigate('/dashboard')
+          }, 1500);
+          
           
         }).catch((error) => { 
             console.log(error.response.data)
+            toast.error("there error update product")
         })
     }
   return (
@@ -135,6 +141,7 @@ const EditProduct = () => {
           />
         </div>
       </form>
+      <ToastContainer/>
     </div>
   )
 }
