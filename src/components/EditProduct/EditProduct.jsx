@@ -35,7 +35,8 @@ const EditProduct = () => {
     }, [id,token])
     const handlePut = (e) => {
          e.preventDefault();
-   
+   const ids = toast.loading("Please wait...")
+
       const formdata = new FormData()
       formdata.append("name", product.name)
       formdata.append("price", product.price)
@@ -52,7 +53,7 @@ const EditProduct = () => {
            
         }).then((res) => {
           console.log(res.data)
-          toast.success("success edit product",{autoClose:1200})
+      toast.update(ids, { render: "created new product", type: "success", isLoading: false  ,autoClose:2500});  
           setTimeout(() => {
             navigate('/dashboard')
           }, 1500);

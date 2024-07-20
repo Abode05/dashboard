@@ -1,9 +1,9 @@
 
 const OrderList = () => {
   return (
-    <div className="p-4">
-      <h1 className="text-3xl font-semibold mb-4 dark:text-gray-200 text-dark-1 ">
-        aOrder list
+    <div className="p-6">
+      <h1 className="text-3xl font-semibold mb-4 dark:text-gray-200 text-dark-1 mt-16">
+        Order list
       </h1>
     </div>
   )

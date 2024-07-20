@@ -1,13 +1,19 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { sidebarData } from '../../assets/constant/data'
+import ConfirmLogOut from '../../Confirm/ConfirmLogOut'
+import { useState } from 'react'
 
 const SideBar = () => {
-  const navigate = useNavigate()
-  const handleLogOut = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const navigate = useNavigate()
+    const handleLogOut = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('User')
     navigate('/')
   }
+   const closeModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <div className="bg-white p-6 w-64 h-screen flex flex-col z-10 shadow-sm  dark:bg-dark-2 dark:text-gray-200 ">
       <h1 className="text-3xl font-bold mb-8 ">
@@ -45,17 +51,18 @@ const SideBar = () => {
         className="mt-auto bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 duration-150 
           font-semibold text-lg
           "
-        onClick={handleLogOut}
+        onClick={()=>setIsModalOpen(true)}
       >
         Logout
       </button>
+      <ConfirmLogOut
+         isOpen={isModalOpen}
+        onClose={closeModal}
+        onConfirm={handleLogOut}
+      />
     </div>
   )
 }
 
 export default SideBar
-{
-  /* <li className="mb-4 hover:bg-blue-500 p-2 rounded cursor-pointer"><a href="#" className="text-gray-700">Products</a></li>
-        <li className="mb-4"><a href="#" className="text-gray-700">Favorites</a></li>
-        <li className="mb-4"><a href="#" className="text-gray-700">Order Lists</a></li> */
-}
+

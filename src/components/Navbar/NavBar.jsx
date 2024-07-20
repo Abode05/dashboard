@@ -3,6 +3,7 @@ import { FiAlignJustify } from 'react-icons/fi'
 import { Context } from '../../App'
 import { NavLink } from 'react-router-dom'
 import { sidebarData } from '../../assets/constant/data'
+import { FaMoon } from "react-icons/fa";
 
 const NavBar = () => {
   const [result, setResult] = useState('')
@@ -56,7 +57,7 @@ const NavBar = () => {
 
   return (
     <div
-      className={`p-4 w-full flex justify-between fixed items-center z-50
+      className={`p-4 w-full flex justify-between fixed items-center z-30
      bg-white shadow-md dark:bg-dark-2 dark:text-gray-200 
      ${
        isScrolled ? 'bg-white/80 backdrop-blur-md' : ''
@@ -71,7 +72,7 @@ const NavBar = () => {
         <input
           type="text"
           placeholder="Search a product ..."
-          className="bg-secondary rounded-full w-56 h-8 pl-8"
+          className="bg-secondary rounded-full w-56 h-8 pl-8 text-black"
           name=""
           onChange={handleSearch}
         />
@@ -88,8 +89,8 @@ const NavBar = () => {
           <p className="text-sub -mt-2">{user.user_name}</p>
         </div>
         <div className="m-auto">|</div>
-        <div className="cursor-pointer w-6 h-6" onClick={toggleTheme}>
-          <i className="fa-solid fa-moon"></i>
+        <div className="cursor-pointer text-xl  " onClick={toggleTheme}>
+         <FaMoon   className=''/>
         </div>
       </div>
 
